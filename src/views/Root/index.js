@@ -2,24 +2,24 @@
 
 import React from 'react';
 import type { Node } from 'react';
-// import { Provider } from 'react-redux';
-// import getStore from 'utils/getStore';
+import { Provider } from 'react-redux';
+import getStore from '../../utils/getStore';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import config from '../../config';
 // import MainRooter from './MainRooter';
 
-// const store = getStore();
+const store = getStore();
 const theme = createMuiTheme(config.theme);
 
 const Root = (): Node => (
-  <MuiThemeProvider theme={theme}>
-    ok
-    {/* <MainRooter /> */}
-  </MuiThemeProvider>
+  <Provider store={store}>
+    <MuiThemeProvider theme={theme}>
+      ok
+      {/* <MainRooter /> */}
+    </MuiThemeProvider>
+  </Provider>
 );
 Root.defaultProps = {};
 
-/* <Provider store={store}>
-</Provider> */
 
 export default Root;
