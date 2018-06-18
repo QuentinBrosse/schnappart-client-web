@@ -2,21 +2,19 @@
 
 import React from 'react';
 import type { Node } from 'react';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { isLoaded, firebaseConnect } from 'react-redux-firebase';
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
 } from 'react-router-dom';
-import { PrivateRoute } from 'common/containers';
-import ShareGroup from 'views/ShareGroup';
-import App from 'views/App';
-import LogIn from 'views/LogIn';
-import CircularProgress from 'material-ui/Progress/CircularProgress';
+import { PrivateRoute } from '../../common/containers';
+import App from '../App';
+import LogIn from '../LogIn';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 type Props = {
   classes: Object,
@@ -24,7 +22,10 @@ type Props = {
 };
 
 const MainRooter = ({ classes, auth }: Props): Node => {
-  if (!isLoaded(auth)) {
+
+  const loading = false;
+
+  if (loading) {
     return (
       <div className={classes.globalProgress}>
         <CircularProgress size={50} />
@@ -36,7 +37,6 @@ const MainRooter = ({ classes, auth }: Props): Node => {
       <Switch>
         <PrivateRoute path="/app" component={App} />
         <Route exact path="/login" component={LogIn} />
-        <Route exact path="/s/:groupId" component={ShareGroup} />
         <Redirect to="/app" />
       </Switch>
     </Router>
@@ -54,12 +54,11 @@ const styles = {
   },
 };
 
-const mapStateToProps = ({ firebase: { auth } }) => ({
-  auth,
-});
+// const mapStateToProps = ({ firebase: { auth } }) => ({
+//   auth,
+// });
 
 export default compose(
   withStyles(styles),
-  firebaseConnect(),
-  connect(mapStateToProps)
+  // connect(mapStateToProps)
 )(MainRooter);
