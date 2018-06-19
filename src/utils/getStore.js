@@ -1,16 +1,20 @@
 import { createStore, applyMiddleware } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
-import makeRootReducer from '../reducers';
+import { persistStore, persistCombineReducers } from 'redux-persist';
+import { uncombinedRootReducer } from '../reducers';
 import makeRootEpic from '../epics';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import once from 'lodash/once';
+import config from '../config';
 
 export default once(initialState => {
+
+  const persistRootReducer = persistCombineReducers(config.reduxPersist, uncombinedRootReducer);
 
   const epicMiddleware = createEpicMiddleware();
 
   const store = createStore(
-    makeRootReducer(),
+    persistRootReducer,
     initialState,
     composeWithDevTools(
       applyMiddleware(epicMiddleware)
@@ -18,6 +22,7 @@ export default once(initialState => {
   );
 
   epicMiddleware.run(makeRootEpic());
+  const persistor = persistStore(store);
 
-  return store;
+  return { store, persistor };
 });

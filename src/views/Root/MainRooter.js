@@ -4,7 +4,7 @@ import React from 'react';
 import type { Node } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { compose } from 'redux';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import {
   BrowserRouter as Router,
   Route,
@@ -14,7 +14,7 @@ import {
 import { PrivateRoute } from '../../common/containers';
 import App from '../App';
 import LogIn from '../LogIn';
-import CircularProgress from '@material-ui/core/CircularProgress';
+// import CircularProgress from '@material-ui/core/CircularProgress';
 
 type Props = {
   classes: Object,
@@ -23,15 +23,13 @@ type Props = {
 
 const MainRooter = ({ classes, auth }: Props): Node => {
 
-  const loading = false;
-
-  if (loading) {
-    return (
-      <div className={classes.globalProgress}>
-        <CircularProgress size={50} />
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className={classes.globalProgress}>
+  //       <CircularProgress size={50} />
+  //     </div>
+  //   );
+  // }
   return (
     <Router>
       <Switch>

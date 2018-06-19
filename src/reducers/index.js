@@ -1,9 +1,13 @@
 import { combineReducers } from 'redux';
-// import groups from './groups';
+import user from './user';
+
+export const uncombinedRootReducer = {
+  user,
+};
 
 const makeRootReducer = asyncReducers =>
   combineReducers({
-    // groups, 
+    ...uncombinedRootReducer, 
     ...asyncReducers,
   });
 

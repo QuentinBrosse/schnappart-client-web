@@ -1,6 +1,5 @@
 // @flow
 
-import React from 'react';
 import type { Node } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 

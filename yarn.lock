@@ -1491,7 +1491,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.5:
+classnames@^2.2.5, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
 
@@ -2764,6 +2764,10 @@ fbjs@^0.8.1, fbjs@^0.8.16:
     promise "^7.1.1"
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.18"
+
+fetch-dedupe@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/fetch-dedupe/-/fetch-dedupe-3.0.0.tgz#3703f4ace2a949d95bf2e28e69da97b27e845d8e"
 
 figures@^2.0.0:
   version "2.0.0"
@@ -5833,6 +5837,13 @@ react-redux@^5.0.7:
     loose-envify "^1.1.0"
     prop-types "^15.6.0"
 
+react-request@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/react-request/-/react-request-3.0.1.tgz#35c00784e1419433e67fce45d24c7921d244055b"
+  dependencies:
+    fetch-dedupe "^3.0.0"
+    prop-types "^15.6.0"
+
 react-router-dom@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-4.3.1.tgz#4c2619fc24c4fa87c9fd18f4fb4a43fe63fbd5c6"
@@ -6023,6 +6034,10 @@ redux-devtools-extension@^2.13.2:
 redux-observable@^1.0.0-beta.2:
   version "1.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/redux-observable/-/redux-observable-1.0.0-beta.2.tgz#05d78e4b088f736db5d8805fecaedf607c4c3754"
+
+redux-persist@^5.10.0:
+  version "5.10.0"
+  resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-5.10.0.tgz#5d8d802c5571e55924efc1c3a9b23575283be62b"
 
 redux@^4.0.0:
   version "4.0.0"
