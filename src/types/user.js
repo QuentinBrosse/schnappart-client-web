@@ -3,6 +3,7 @@ export type User = {
   username: string,
   email: string,
   authToken: string,
+  projects: string[],
 };
 
 export type UserState = {

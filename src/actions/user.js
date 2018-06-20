@@ -10,6 +10,7 @@ export const logIn = (user: User): LogIn => ({
       username: user.username,
       email: user.email,
       authToken: user.authToken,
+      projects: user.projects,
     },
   },
 });
