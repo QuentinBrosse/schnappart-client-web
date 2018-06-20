@@ -13,7 +13,7 @@ export type UserState = {
 export type LogIn = {
   +type: 'USER_LOG_IN',
   +payload: {
-    user: User,
+    +user: User,
   },
 };
 
