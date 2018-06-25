@@ -10,6 +10,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import LinkIcon from '@material-ui/icons/Link';
+import uniqueId from 'lodash/uniqueId';
 import type { SearchResult } from '../../types/searchResult';
 import ImageGallery from './ImageGallery';
 import SearchResultFeatures from './SearchResultFeatures';
@@ -42,9 +43,8 @@ const SearchResultCard = ({ classes, searchResult, onAcceptation }: Props): Node
       }
       <CardContent>
         {searchResult.description.split('\n').map(descrPara => (
-          <Typography component="p" key={descrPara}>
-            {descrPara}
-            <br />
+          <Typography component="p" key={uniqueId('srDescr_')}>
+            {descrPara}<br />
           </Typography>
         ))}
       </CardContent>
