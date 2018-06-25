@@ -25,8 +25,6 @@ type State = {
 };
 
 class Inbox extends React.Component<Props, State> {
-  static defaultProps = {};
-
   state = {
     searchResults: [],
     totalResultsCount: 0,

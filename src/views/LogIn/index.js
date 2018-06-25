@@ -85,44 +85,42 @@ class SignIn extends React.Component<Props, State> {
               body={fields}
               afterFetch={this.afterFetch}
             >
-              {({
- fetching, failed, data, doFetch,
-}) => (
-  <form autoComplete="off" onSubmit={this.submit(doFetch)}>
-    <TextField
-      id="username"
-      label="Username"
-      margin="normal"
-      onChange={this.onChange('username')}
-      value="Quentin"
-      required
-      fullWidth
-    />
-    <TextField
-      id="password"
-      label="Password"
-      margin="normal"
-      type="password"
-      onChange={this.onChange('password')}
-      value="123Soleil!"
-      required
-      fullWidth
-    />
-    <Typography component="p" color="error">
-      { failed && this.getError(data) }
-    </Typography>
-    <div className={classes.buttonContainer}>
-      <LoadingButton
-        color="primary"
-        type="submit"
-        className={classes.submitButton}
-        loading={fetching}
-        success={!failed}
-      >
-                      Connection
-      </LoadingButton>
-    </div>
-  </form>
+              {({ fetching, failed, data, doFetch }) => (
+                <form autoComplete="off" onSubmit={this.submit(doFetch)}>
+                  <TextField
+                    id="username"
+                    label="Username"
+                    margin="normal"
+                    onChange={this.onChange('username')}
+                    value="Quentin"
+                    required
+                    fullWidth
+                  />
+                  <TextField
+                    id="password"
+                    label="Password"
+                    margin="normal"
+                    type="password"
+                    onChange={this.onChange('password')}
+                    value="123Soleil!"
+                    required
+                    fullWidth
+                  />
+                  <Typography component="p" color="error">
+                    { failed && this.getError(data) }
+                  </Typography>
+                  <div className={classes.buttonContainer}>
+                    <LoadingButton
+                      color="primary"
+                      type="submit"
+                      className={classes.submitButton}
+                      loading={fetching}
+                      success={!failed}
+                    >
+                                    Connection
+                    </LoadingButton>
+                  </div>
+                </form>
               )}
             </Fetch>
           </Paper>
