@@ -15,6 +15,6 @@ export default {
     storage,
     whitelist: ['user'],
     debug: inDevEnv(),
-  }
+  },
 
 };

@@ -13,32 +13,52 @@ type Props = {
   loading?: boolean,
   success?: boolean,
   children: Node,
+  variant?: 'fab' | 'contained',
 };
 
-const SubmitButton = ({ classes, loading, success, children, ...rest }: Props): Node => {
+const LoadingButton = ({
+  classes,
+  loading,
+  success,
+  children,
+  variant,
+  ...rest
+}: Props): Node => {
   const buttonClassName = classNames({ [classes.buttonSuccess]: success });
+  const isFab = variant === 'fab';
+  const progressClass = isFab
+    ? classes.fabProgress
+    : classes.buttonProgress;
+  const progressSize = isFab ? 68 : 24;
+  const progressThickness = isFab ? 1.4 : 3.6;
   return (
     <div className={classes.root}>
       <div className={classes.wrapper}>
         <Button
-          variant="contained"
-          color="primary"
-          type="submit"
+          variant={variant}
           className={buttonClassName}
           disabled={loading}
           {...rest}
         >
           {children}
         </Button>
-        {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+        {
+          loading &&
+          <CircularProgress
+            size={progressSize}
+            thickness={progressThickness}
+            className={progressClass}
+          />
+        }
       </div>
     </div>
   );
-}
+};
 
-SubmitButton.defaultProps = {
+LoadingButton.defaultProps = {
   loading: false,
   success: false,
+  variant: 'contained',
 };
 
 const styles = ({ spacing }) => ({
@@ -56,6 +76,13 @@ const styles = ({ spacing }) => ({
       backgroundColor: green[700],
     },
   },
+  fabProgress: {
+    color: green[500],
+    position: 'absolute',
+    top: -6,
+    left: -6,
+    zIndex: 1,
+  },
   buttonProgress: {
     color: green[500],
     position: 'absolute',
@@ -66,4 +93,4 @@ const styles = ({ spacing }) => ({
   },
 });
 
-export default withStyles(styles)(SubmitButton);
+export default withStyles(styles)(LoadingButton);

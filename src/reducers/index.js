@@ -7,7 +7,7 @@ export const uncombinedRootReducer = {
 
 const makeRootReducer = asyncReducers =>
   combineReducers({
-    ...uncombinedRootReducer, 
+    ...uncombinedRootReducer,
     ...asyncReducers,
   });
 

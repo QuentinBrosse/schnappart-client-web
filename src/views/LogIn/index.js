@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { compose } from 'redux';
-import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import { Redirect } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
@@ -10,9 +10,8 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { Fetch } from '../../common/containers';
-import SubmitButton from './SubmitButton';
+import { LoadingButton } from '../../common/components';
 import { logIn } from '../../actions/user';
-import type { User } from '../../types/user';
 
 type Props = {
   classes: Object,
@@ -28,7 +27,6 @@ type State = {
 };
 
 class SignIn extends React.Component<Props, State> {
-
   state = {
     fields: {
       username: 'Quentin',
@@ -43,8 +41,15 @@ class SignIn extends React.Component<Props, State> {
       fields: {
         ...state.fields,
         [fieldName]: event.target.value,
-      }
+      },
     }));
+  }
+
+  getError = (data: Object) => {
+    if (data && data.non_field_errors) {
+      return data.non_field_errors.join(', ');
+    }
+    return 'Error.';
   }
 
   submit = (doFetch: Function) => (event: SyntheticInputEvent<*>) => {
@@ -52,14 +57,7 @@ class SignIn extends React.Component<Props, State> {
     doFetch();
   }
 
-  getError = (data: Object) => {
-    if (data && data['non_field_errors']) {
-      return data['non_field_errors'].join(', ');
-    }
-    return 'Error.'
-  }
-
-  afterFetch = ({ data: user, failed }: { data: User, failed: boolean }) => {
+  afterFetch = ({ data: user, failed }) => {
     if (!failed) {
       this.props.dLogIn(user);
       this.setState({ redirect: true });
@@ -71,7 +69,7 @@ class SignIn extends React.Component<Props, State> {
     const { fields, redirect } = this.state;
 
     if (redirect) {
-      return <Redirect to='/app' />
+      return <Redirect to="/app" />;
     }
 
     return (
@@ -87,54 +85,48 @@ class SignIn extends React.Component<Props, State> {
               body={fields}
               afterFetch={this.afterFetch}
             >
-              {({ fetching, failed, data, doFetch, error }) => {
-                
-                if (data) {
-                  console.log(data);
-                }
-
-                return (
-                  <form autoComplete="off" onSubmit={this.submit(doFetch)}>
-                    <TextField
-                      id="username"
-                      label="Username"
-                      margin="normal"
-                      onChange={this.onChange('username')}
-                      value="Quentin"
-                      required
-                      fullWidth
-                    />
-                    <TextField
-                      id="password"
-                      label="Password"
-                      margin="normal"
-                      type="password"
-                      onChange={this.onChange('password')}
-                      value="123Soleil!"
-                      required
-                      fullWidth
-                    />
-                    <Typography component="p" className={classes.errors}>
-                      { failed && this.getError(data) }
-                    </Typography>
-                    <div className={classes.buttonContainer}>
-                      <SubmitButton
-                        variant="contained"
-                        color="primary"
-                        type="submit"
-                        className={classes.submitButton}
-                        loading={fetching}
-                        success={!failed}
-                      >
-                        Connection
-                      </SubmitButton>
-                    </div>
-                  </form>
-                )
-              }}
+              {({
+ fetching, failed, data, doFetch,
+}) => (
+  <form autoComplete="off" onSubmit={this.submit(doFetch)}>
+    <TextField
+      id="username"
+      label="Username"
+      margin="normal"
+      onChange={this.onChange('username')}
+      value="Quentin"
+      required
+      fullWidth
+    />
+    <TextField
+      id="password"
+      label="Password"
+      margin="normal"
+      type="password"
+      onChange={this.onChange('password')}
+      value="123Soleil!"
+      required
+      fullWidth
+    />
+    <Typography component="p" color="error">
+      { failed && this.getError(data) }
+    </Typography>
+    <div className={classes.buttonContainer}>
+      <LoadingButton
+        color="primary"
+        type="submit"
+        className={classes.submitButton}
+        loading={fetching}
+        success={!failed}
+      >
+                      Connection
+      </LoadingButton>
+    </div>
+  </form>
+              )}
             </Fetch>
           </Paper>
-        </Grid>    
+        </Grid>
       </Grid>
     );
   }
@@ -155,14 +147,14 @@ const styles = ({ palette, spacing }) => ({
   },
   errors: {
     color: palette.error.main,
-  }
+  },
 });
 
 const mapDispatchToProps = {
   dLogIn: logIn,
-}
+};
 
 export default compose(
   withStyles(styles),
-  connect(null, mapDispatchToProps)
+  connect(null, mapDispatchToProps),
 )(SignIn);

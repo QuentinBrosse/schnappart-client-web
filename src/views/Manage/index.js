@@ -9,11 +9,15 @@ type Props = {
 };
 
 const Manage = ({ classes }: Props): Node => (
-  'Manage'
+  <div className={classes.root}>
+    Manage
+  </div>
 );
 
 Manage.defaultProps = {};
 
-const styles = {}
+const styles = {
+  root: {},
+};
 
 export default withStyles(styles)(Manage);

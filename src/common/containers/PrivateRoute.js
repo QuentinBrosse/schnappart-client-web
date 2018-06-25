@@ -22,7 +22,7 @@ const PrivateRoute = ({
   return (
     <Route
       {...rest}
-      render={props => {
+      render={(props) => {
         if (isConnected) {
           return <Component {...props} />;
         }
