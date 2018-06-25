@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import head from 'lodash/head';
 import Typography from '@material-ui/core/Typography';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import without from 'lodash/without';
 import find from 'lodash/find';
 import { Fetch } from '../../common/containers';
@@ -20,6 +21,7 @@ type Props = {
 
 type State = {
   searchResults: SearchResult[],
+  totalResultsCount: number,
 };
 
 class Inbox extends React.Component<Props, State> {
@@ -27,6 +29,7 @@ class Inbox extends React.Component<Props, State> {
 
   state = {
     searchResults: [],
+    totalResultsCount: 0,
   };
 
   getError = (data: Object) => (data && data.detail ? data.detail : 'Error.');
@@ -44,6 +47,7 @@ class Inbox extends React.Component<Props, State> {
     if (!failed) {
       this.setState({
         searchResults: data,
+        totalResultsCount: data.length,
       });
     }
   };
@@ -53,6 +57,27 @@ class Inbox extends React.Component<Props, State> {
       There is no results for the moment, please comeback later.
     </Typography>
   );
+
+  renderResult = (searchResult: SearchResult) => {
+    const { searchResults, totalResultsCount } = this.state;
+    const currentCount = totalResultsCount - searchResults.length;
+    const progress = (100 / totalResultsCount) * currentCount;
+    return (
+      <div>
+        <SearchResultCard
+          key={searchResult.id}
+          searchResult={searchResult}
+          onAcceptation={this.removeSearchResult}
+        />
+        <div>
+          <LinearProgress variant="determinate" value={progress} />
+          <Typography color="textSecondary" align="center">
+            {currentCount} / {totalResultsCount}
+          </Typography>
+        </div>
+      </div>
+    );
+  };
 
   render() {
     const { projectId } = this.props;
@@ -75,13 +100,7 @@ class Inbox extends React.Component<Props, State> {
           }
 
           if (searchResults.length > 0) {
-            return searchResults.map(searchResult => (
-              <SearchResultCard
-                key={searchResult.id}
-                searchResult={searchResult}
-                onAcceptation={this.removeSearchResult}
-              />
-            ));
+            return this.renderResult(searchResults[0]);
           }
           return this.renderNoResults();
         }}
