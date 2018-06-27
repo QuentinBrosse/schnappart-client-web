@@ -13,6 +13,7 @@ import { Fetch } from '../../common/containers';
 import { CenterLoader } from '../../common/components';
 import SearchResultCard from './SearchResultCard';
 import type { SearchResult } from '../../types/searchResult';
+import type { SearchResultFeature } from '../../types/feature';
 
 type Props = {
   classes: Object,
@@ -29,6 +30,17 @@ class Inbox extends React.Component<Props, State> {
     searchResults: [],
     totalResultsCount: 0,
   };
+
+  onAddFeature = (searchResultId: number) => (srFeature: SearchResultFeature) => {
+    this.setState(state => ({
+      searchResults: state.searchResults.map((sr) => {
+        if (sr.id === searchResultId) {
+          return { ...sr, features: [...sr.features, srFeature] };
+        }
+        return sr;
+      }),
+    }));
+  }
 
   getError = (data: Object) => (data && data.detail ? data.detail : 'Error.');
 
@@ -66,6 +78,7 @@ class Inbox extends React.Component<Props, State> {
           key={searchResult.id}
           searchResult={searchResult}
           onAcceptation={this.removeSearchResult}
+          onAddFeature={this.onAddFeature}
         />
         <div>
           <LinearProgress variant="determinate" value={progress} />

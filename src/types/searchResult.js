@@ -1,6 +1,7 @@
 // @flow
 
 import type { Search } from './search';
+import type { SearchResultFeature } from './feature';
 
 export type SearchResult = {
   +id: number,
@@ -23,4 +24,5 @@ export type SearchResult = {
   +energyRate: string,
   +alive: boolean,
   +accepted: null | string,
+  +features: SearchResultFeature[],
 };

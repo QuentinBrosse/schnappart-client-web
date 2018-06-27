@@ -5,6 +5,7 @@ import type { Node } from 'react';
 import { Fetch as ReactRequestFetch } from 'react-request';
 import { connect } from 'react-redux';
 import camelcaseKeys from 'camelcase-keys';
+import snakecaseKeys from 'snakecase-keys';
 import config from '../../config';
 
 type Props = {
@@ -28,8 +29,8 @@ const Fetch = ({
         ...rest.headers,
         ...authHeader,
       }}
-      body={body ? JSON.stringify(body) : undefined}
-      transformData={data => camelcaseKeys(data)}
+      body={body ? JSON.stringify(snakecaseKeys(body)) : undefined}
+      transformData={data => camelcaseKeys(data, { deep: true })}
     />
   );
 };

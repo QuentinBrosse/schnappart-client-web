@@ -12,6 +12,7 @@ import {
 import NavBar from './NavBar';
 import Manage from '../Manage';
 import Inbox from '../Inbox';
+import GlobalFetches from './GlobalFetches';
 
 
 type Props = {
@@ -22,6 +23,7 @@ const LogIn = ({ classes }: Props): Node => (
   <Router basename="/app">
     <div className={classes.root}>
       <NavBar />
+      <GlobalFetches />
       <div className={classes.container}>
         <Switch>
           <Route exact path="/" component={Manage} />

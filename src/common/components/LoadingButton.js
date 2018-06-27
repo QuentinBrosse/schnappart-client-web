@@ -14,10 +14,12 @@ type Props = {
   success?: boolean,
   children: Node,
   variant?: 'fab' | 'contained',
+  className?: ?string,
 };
 
 const LoadingButton = ({
   classes,
+  className,
   loading,
   success,
   children,
@@ -32,7 +34,7 @@ const LoadingButton = ({
   const progressSize = isFab ? 68 : 24;
   const progressThickness = isFab ? 1.4 : 3.6;
   return (
-    <div className={classes.root}>
+    <div className={classNames(className, classes.root)}>
       <div className={classes.wrapper}>
         <Button
           variant={variant}
@@ -59,6 +61,7 @@ LoadingButton.defaultProps = {
   loading: false,
   success: false,
   variant: 'contained',
+  className: undefined,
 };
 
 const styles = ({ spacing }) => ({

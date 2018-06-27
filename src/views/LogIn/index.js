@@ -113,11 +113,10 @@ class SignIn extends React.Component<Props, State> {
                     <LoadingButton
                       color="primary"
                       type="submit"
-                      className={classes.submitButton}
                       loading={fetching}
                       success={!failed}
                     >
-                                    Connection
+                      Connection
                     </LoadingButton>
                   </div>
                 </form>
