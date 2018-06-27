@@ -36,11 +36,12 @@ class FeaturesManager extends React.Component<Props, State> {
     };
   }
 
-  static getDerivedStateFromProps({ feature, searchResult }, state) {
-    if (feature.all.length > 0) {
+  static getDerivedStateFromProps({ feature, searchResult }: Props, state: State) {
+    if (feature.all && feature.all.length > 0) {
       const availableFeatures = differenceWith(
         feature.all,
         searchResult.features,
+        // $FlowFixMe
         (f, srf) => f.id === srf.feature.id,
       );
       return {
@@ -58,7 +59,7 @@ class FeaturesManager extends React.Component<Props, State> {
     currentValue: '',
   };
 
-  handleChange = (field: $Keys<State>) => (event) => {
+  handleChange = (field: $Keys<State>) => (event: Object) => {
     this.setState({
       [field]: event.target.value,
     });

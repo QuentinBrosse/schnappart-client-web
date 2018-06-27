@@ -7,6 +7,7 @@
     "@material-ui/icons": "^1.1.0",
     "camelcase-keys": "^4.2.0",
     "classnames": "^2.2.6",
+    "flow-bin": "^0.75.0",
     "lodash": "^4.17.10",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
